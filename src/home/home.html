@@ -1,0 +1,15 @@
+<div class="question-card" ng-repeat="question in home.questions" ng-if="!home.answerScreen" ng-show="home.currentIndex === $index">
+  <p>{{$index+1}}) {{question.question}}</p>
+  <md-radio-group ng-model="question.userAnswer" ng-change="home.onAnswer($index)">
+    <md-radio-button value="{{opt}}" ng-repeat="opt in question.answerOptions">{{ opt }}</md-radio-button>
+  </md-radio-group>
+</div>
+<div class="answer-report" ng-if="home.answerScreen">
+  your score is {{home.score}}
+  <div class="answer" ng-repeat="question in home.questions">
+    <p>{{$index+1}}) {{question.question}} - <span ng-class="{green : question.status ==='Correct',red: question.status==='Wrong'}">{{question.status}}</span></p>
+    <p>Your Answer: {{question.userAnswer}}</p>
+    <p>Correct Answer: {{question.correctAnswer}}</p>
+  </div>
+  <md-button class="md-raised" ng-click="home.onReset()">reset</md-button>
+</div>
